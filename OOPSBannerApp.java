@@ -13,27 +13,84 @@
  * </p>
  *
  * @author Tulsi
- * @version 2
+ * @version 3
  */
+// Extend use case UC2 to use String.join() method to create each line of the "OOPS" banner
+// instead of concatenating strings with the + operator. This is essentially to overcome the
+// drawbacks of using the + operator for string concatenation which essentially creates
+// multiple intermediate String objects in memory leading to inefficiency.
 
-// Extend the User Story 1 to display the message "OOPS" in a banner format
-// using characters formed by spaces and asterisks (*) to create a visual
-// effect for each letter in the message. Use print statements for each line
-// instead of a loop.
 
 public class OOPSBannerApp {
     // Main method to run the banner display
-    // Print each line of the OOPS banner to create the visual effect for the
-    // message "OOPS". Construct each line using string concatenation.
+    // Use System.out.println() to print each line of the OOPS banner to create
+    // the visual effect for the message "OOPS". Construct each line using
+    // String.join() method for better readability and efficiency.
     // Each line corresponds to a row in the banner for the letters O, O, P, S.
-    // Using individual print statements for each line.
     public static void main(String[] args) {
-        System.out.println("  ***     " + "   " + "  ***     " + "   " + " ******  " + "   " + " ******  ");
-        System.out.println(" *   *    " + "   " + " *   *    " + "   " + "*     *  " + "   " + "*       ");
-        System.out.println("*     *   " + "   " + "*     *   " + "   " + "*     *  " + "   " + "*       ");
-        System.out.println("*     *   " + "   " + "*     *   " + "   " + " ******  " + "   " + " ******  ");
-        System.out.println("*     *   " + "   " + "*     *   " + "   " + "*       " + "   " + "       * ");
-        System.out.println(" *   *    " + "   " + " *   *    " + "   " + "*       " + "   " + "       * ");
-        System.out.println("  ***     " + "   " + "  ***     " + "   " + "*       " + "   " + " ******  ");
+
+        // Line 1
+        System.out.println(
+                String.join(" ",
+                        "  *****  ",
+                        "  *****  ",
+                        " ******  ",
+                        "  *****  ")
+        );
+
+        // Line 2
+        System.out.println(
+                String.join(" ",
+                        " *     * ",
+                        " *     * ",
+                        " *     * ",
+                        " *       ")
+        );
+
+        // Line 3
+        System.out.println(
+                String.join(" ",
+                        "*       *",
+                        "*       *",
+                        "*       *",
+                        "*       ")
+        );
+
+        // Line 4
+        System.out.println(
+                String.join(" ",
+                        "*       *",
+                        "*       *",
+                        " ******  ",
+                        " ******  ")
+        );
+
+        // Line 5
+        System.out.println(
+                String.join(" ",
+                        "*       *",
+                        "*       *",
+                        " *       ",
+                        "       * ")
+        );
+
+        // Line 6
+        System.out.println(
+                String.join(" ",
+                        " *     * ",
+                        " *     * ",
+                        " *       ",
+                        " *     * ")
+        );
+
+        // Line 7
+        System.out.println(
+                String.join(" ",
+                        "  *****  ",
+                        "  *****  ",
+                        " *       ",
+                        "  *****  ")
+        );
     }
 }
+
