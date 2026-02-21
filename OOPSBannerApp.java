@@ -13,67 +13,67 @@
  * </p>
  *
  * @author Tulsi
- * @version 5
+ * @version 6
  */
-// Extend the user story 4 to further develop the OOPS Banner Application by
-// not only using String arrays to hold banner lines and printing them in a
-// loop. But also by defining and populating the array in a more concise way
-// at the time of declaration using String.join() method to create each line
-// of the banner.
 
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
 
-        // UC5: inline array initialization using String.join() for each banner line
-        String[] banner = new String[] {
-            String.join("  ",
-                "  *****  ",   // O row 0
-                "  *****  ",   // O row 0 (second O)
-                "*******  ",   // P row 0
-                "  *****  "    // S row 0
-            ),
-            String.join("  ",
-                " *     * ",   // O row 1
-                " *     * ",
-                "*     *  ",   // P row 1
-                " *       "    // S row 1
-            ),
-            String.join("  ",
-                " *     * ",
-                " *     * ",
-                "*     *  ",
-                " *       "
-            ),
-            String.join("  ",
-                " *     * ",
-                " *     * ",
-                "*******  ",
-                "  *****  "
-            ),
-            String.join("  ",
-                " *     * ",
-                " *     * ",
-                "*        ",
-                "       * "
-            ),
-            String.join("  ",
-                " *     * ",
-                " *     * ",
-                "*        ",
-                "       * "
-            ),
-            String.join("  ",
-                "  *****  ",
-                "  *****  ",
-                "*        ",
-                "  *****  "
-            )
-        };
+        // Get patterns using helper methods
+        String[] O = getOPattern();
+        String[] P = getPPattern();
+        String[] S = getSPattern();
 
-        // print using enhanced for-loop (requirement)
+        // Assemble banner using method-returned arrays
+        String[] banner = new String[7];
+
+        for (int i = 0; i < 7; i++) {
+            banner[i] = String.join("  ", O[i], O[i], P[i], S[i]);
+        }
+
+        // Print using enhanced for loop
         for (String line : banner) {
             System.out.println(line);
         }
+    }
+
+    // Helper method for O
+    public static String[] getOPattern() {
+        return new String[]{
+                "  *****  ",
+                " *     * ",
+                " *     * ",
+                " *     * ",
+                " *     * ",
+                " *     * ",
+                "  *****  "
+        };
+    }
+
+    // Helper method for P
+    public static String[] getPPattern() {
+        return new String[]{
+                "*******  ",
+                "*     *  ",
+                "*     *  ",
+                "*******  ",
+                "*        ",
+                "*        ",
+                "*        "
+        };
+    }
+
+    // Helper method for S
+    public static String[] getSPattern() {
+        return new String[]{
+                "  *****  ",
+                " *       ",
+                " *       ",
+                "  *****  ",
+                "       * ",
+                "       * ",
+                "  *****  "
+        };
     }
 }
