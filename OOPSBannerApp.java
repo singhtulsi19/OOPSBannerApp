@@ -13,67 +13,117 @@
  * </p>
  *
  * @author Tulsi
- * @version 6
+ * @version 7
  */
 
 public class OOPSBannerApp {
 
+    /**
+     * Inner static class that stores a character and its 7-line banner pattern.
+     */
+    static class CharacterPatternMap {
+        private final char character;
+        private final String[] pattern; // 7 lines
+
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
+    }
+
+    /**
+     * Lookup utility: return the 7-line pattern for the requested character.
+     * If the character is not found, returns an empty 7-line pattern of spaces.
+     */
+    public static String[] getCharacterPattern(CharacterPatternMap[] mapArray, char ch) {
+        for (CharacterPatternMap m : mapArray) {
+            if (m.getCharacter() == ch) {
+                return m.getPattern();
+            }
+        }
+        // fallback: 7 blank lines of same width (7 chars)
+        return new String[] {
+            "       ",
+            "       ",
+            "       ",
+            "       ",
+            "       ",
+            "       ",
+            "       "
+        };
+    }
+
+    /**
+     * Print the given word in banner style using the provided CharacterPatternMap array.
+     */
+    public static void printBanner(String word, CharacterPatternMap[] mapArray) {
+        // We'll build 7 output lines (rows) using StringBuilder
+        StringBuilder[] rows = new StringBuilder[7];
+        for (int i = 0; i < 7; i++) rows[i] = new StringBuilder();
+
+        for (char ch : word.toCharArray()) {
+            String[] pat = getCharacterPattern(mapArray, ch);
+
+            // append each row of the character pattern, followed by two spaces
+            for (int r = 0; r < 7; r++) {
+                rows[r].append(pat[r]).append("  ");
+            }
+        }
+
+        // print assembled banner
+        for (StringBuilder row : rows) {
+            System.out.println(row.toString());
+        }
+    }
+
     public static void main(String[] args) {
-
-        // Get patterns using helper methods
-        String[] O = getOPattern();
-        String[] P = getPPattern();
-        String[] S = getSPattern();
-
-        // Assemble banner using method-returned arrays
-        String[] banner = new String[7];
-
-        for (int i = 0; i < 7; i++) {
-            banner[i] = String.join("  ", O[i], O[i], P[i], S[i]);
-        }
-
-        // Print using enhanced for loop
-        for (String line : banner) {
-            System.out.println(line);
-        }
-    }
-
-    // Helper method for O
-    public static String[] getOPattern() {
-        return new String[]{
-                "  *****  ",
-                " *     * ",
-                " *     * ",
-                " *     * ",
-                " *     * ",
-                " *     * ",
-                "  *****  "
+        // 7-line patterns for O, P, S (consistent width)
+        String[] O = {
+            " ***** ",
+            "*     *",
+            "*     *",
+            "*     *",
+            "*     *",
+            "*     *",
+            " ***** "
         };
-    }
 
-    // Helper method for P
-    public static String[] getPPattern() {
-        return new String[]{
-                "*******  ",
-                "*     *  ",
-                "*     *  ",
-                "*******  ",
-                "*        ",
-                "*        ",
-                "*        "
+        String[] P = {
+            " ***** ",
+            "*     *",
+            "*     *",
+            " ***** ",
+            "*      ",
+            "*      ",
+            "*      "
         };
-    }
 
-    // Helper method for S
-    public static String[] getSPattern() {
-        return new String[]{
-                "  *****  ",
-                " *       ",
-                " *       ",
-                "  *****  ",
-                "       * ",
-                "       * ",
-                "  *****  "
+        String[] S = {
+            " ***** ",
+            "*      ",
+            "*      ",
+            " ***** ",
+            "      *",
+            "      *",
+            " ***** "
         };
+
+        // store patterns in array of CharacterPatternMap objects
+        CharacterPatternMap[] patterns = new CharacterPatternMap[] {
+            new CharacterPatternMap('O', O),
+            new CharacterPatternMap('P', P),
+            new CharacterPatternMap('S', S)
+        };
+
+        // print the banner for "OOPS"
+        printBanner("OOPS", patterns);
     }
 }
